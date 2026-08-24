@@ -4,6 +4,8 @@
 
 ![业务流程图](output/python_hr_agent_business_flow.png)
 
+[演示视频：PULSE HR 项目演示](output/PULSE_HR_项目演示.mp4)
+
 ## 已实现能力
 
 | 业务阶段 | Agent 能力 | 人工控制点 |
