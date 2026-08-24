@@ -6,6 +6,8 @@
 
 [演示视频：PULSE HR 项目演示](output/PULSE_HR_项目演示.mp4)
 
+[补充演示视频：微信视频版](output/demo-video-wechat.mp4)
+
 ## 已实现能力
 
 | 业务阶段 | Agent 能力 | 人工控制点 |
