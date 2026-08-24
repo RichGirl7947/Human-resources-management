@@ -1,0 +1,117 @@
+@baseUrl = http://127.0.0.1:8000
+
+### 1. 创建招聘需求并生成职位画像
+POST {{baseUrl}}/api/v1/recruitment/requisitions
+Content-Type: application/json
+
+{
+  "title": "Python 后端工程师",
+  "department": "研发中心",
+  "headcount": 2,
+  "salary": "20K-30K·14薪",
+  "education": "本科",
+  "experience": "3-5年",
+  "responsibilities": ["开发 HR Agent API", "维护数据服务", "编写自动化测试"],
+  "required_skills": ["Python", "FastAPI", "SQLAlchemy", "pytest"]
+}
+
+### 2. 人工批准用人需求
+POST {{baseUrl}}/api/v1/recruitment/requisitions/1/approve
+
+### 3. Agent 筛选候选人
+POST {{baseUrl}}/api/v1/recruitment/requisitions/1/candidates
+Content-Type: application/json
+
+{
+  "name": "张三",
+  "email": "zhangsan@example.com",
+  "resume_text": "5 年 Python 后端经验，使用 FastAPI、SQLAlchemy 和 pytest 构建过企业级系统。"
+}
+
+### 3.1 人工确认录用并生成 Offer 状态
+POST {{baseUrl}}/api/v1/recruitment/candidates/1/decision
+Content-Type: application/json
+
+{
+  "approved": true,
+  "comment": "面试通过"
+}
+
+### 4. 新员工入职
+POST {{baseUrl}}/api/v1/onboarding/employees
+Content-Type: application/json
+
+{
+  "name": "张三",
+  "email": "zhangsan@example.com",
+  "department": "研发中心",
+  "position": "Python 后端工程师",
+  "start_date": "2026-09-01"
+}
+
+### 4.1 完成入职
+POST {{baseUrl}}/api/v1/onboarding/employees/1/complete
+
+### 5. 政策问答
+POST {{baseUrl}}/api/v1/hr/ask
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "question": "年假需要如何申请？"
+}
+
+### 6. 发起 HR 流程
+POST {{baseUrl}}/api/v1/hr/workflows
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "content": "申请下周五休假一天"
+}
+
+### 6.1 人工审批 HR 流程（前面的政策问答为请求 1，所以此处示例为请求 2）
+POST {{baseUrl}}/api/v1/hr/requests/2/decision
+Content-Type: application/json
+
+{
+  "approved": true,
+  "comment": "同意休假"
+}
+
+### 7. 绩效评审与发展建议
+POST {{baseUrl}}/api/v1/performance/reviews
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "cycle": "2026-H2",
+  "goals": ["上线招聘 Agent", "API 自动化测试覆盖核心流程"],
+  "score": 4.2,
+  "manager_feedback": "交付稳定，建议增强业务分析能力。"
+}
+
+### 8. 发起离职
+POST {{baseUrl}}/api/v1/offboarding
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "reason": "个人职业发展",
+  "last_working_day": "2027-03-31"
+}
+
+### 8.1 人工批准离职
+POST {{baseUrl}}/api/v1/offboarding/1/decision
+Content-Type: application/json
+
+{
+  "approved": true,
+  "comment": "完成交接后离职"
+}
+
+### 8.2 完成交接与离职归档
+POST {{baseUrl}}/api/v1/offboarding/1/complete
+
+### 9. 查看业务看板
+GET {{baseUrl}}/api/v1/dashboard
